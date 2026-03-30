@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Гарантия и Контроль | SmartShop</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .warranty-card {
+            background: #fff;
+            border-radius: 20px;
+            padding: 30px;
+            margin-bottom: 30px;
+            border-left: 5px solid #0066cc;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+        .step-list {
+            list-style: none;
+            padding: 0;
+        }
+        .step-item {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 20px;
+        }
+        .step-number {
+            background: #0066cc;
+            color: #white;
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px;
+            flex-shrink: 0;
+            font-weight: bold;
+            color: white;
+        }
+        .highlight-box {
+            background: #f0f7ff;
+            padding: 20px;
+            border-radius: 15px;
+            border: 1px dashed #0066cc;
+            margin: 30px 0;
+        }
+    </style>
+</head>
+<body>
+
+    <header class="header">
+        <nav class="nav-container">
+            <a href="index.html" class="logo">Smart<span>Shop</span></a>
+            <div class="nav-links">
+                <a href="index.html">Главная</a>
+                <a href="about.html">О сервисе</a>
+                <a href="warranty.html" class="active">Гарантия</a>
+                <a href="#contacts">Контакты</a>
+            </div>
+            <a href="tel:+79167266817" class="header-phone">+7 916 726-68-17</a>
+        </nav>
+    </header>
+
+    <main class="container">
+        <section class="content-header">
+            <h1>Гарантия и Стандарты Качества</h1>
+            <p>В SmartShop ответственность за результат закреплена техническим регламентом.</p>
+        </section>
+
+        <div class="warranty-card">
+            <h2>3 уровня проверки каждой запчасти</h2>
+            <p>Мы исключаем установку брака еще до того, как аппарат попадет на стол мастера:</p>
+            <ul class="step-list">
+                <li class="step-item">
+                    <div class="step-number">1</div>
+                    <div><strong>Верификация SKU:</strong> Сверка артикула детали с заводской спецификацией устройства (Hardware Revision).</div>
+                </li>
+                <li class="step-item">
+                    <div class="step-number">2</div>
+                    <div><strong>Визуальный контроль:</strong> Проверка на микротрещины, целостность шлейфов и отсутствие следов переклейки.</div>
+                </li>
+                <li class="step-item">
+                    <div class="step-number">3</div>
+                    <div><strong>Тестовый запуск:</strong> Проверка тачскрина, цветопередачи и энергопотребления на стенде перед финальной сборкой.</div>
+                </li>
+            </ul>
+        </div>
+
+        <section>
+            <h2>Сроки и обязательства</h2>
+            <p>Мы не даем «пожизненных» обещаний, которые невозможно выполнить. Мы даем реальную гарантию:</p>
+            <table style="width: 100%; border-collapse: collapse; margin-top: 20px;">
+                <tr style="background: #f8f9fa;">
+                    <th style="padding: 15px; border: 1px solid #eee; text-align: left;">Вид работы</th>
+                    <th style="padding: 15px; border: 1px solid #eee; text-align: left;">Срок гарантии</th>
+                </tr>
+                <tr>
+                    <td style="padding: 15px; border: 1px solid #eee;">Модульный ремонт (Дисплеи, АКБ)</td>
+                    <td style="padding: 15px; border: 1px solid #eee;">от 90 до 180 дней</td>
+                </tr>
+                <tr>
+                    <td style="padding: 15px; border: 1px solid #eee;">Пайка и восстановление цепей питания</td>
+                    <td style="padding: 15px; border: 1px solid #eee;">30 - 60 дней</td>
+                </tr>
+                <tr>
+                    <td style="padding: 15px; border: 1px solid #eee;">Замена разъемов и мелких компонентов</td>
+                    <td style="padding: 15px; border: 1px solid #eee;">90 дней</td>
+                </tr>
+            </table>
+        </section>
+
+        <div class="highlight-box">
+            <h3>Важно о "своих" запчастях</h3>
+            <p>Если вы приносите свою деталь, мы гарантируем только качество её установки. Мы не можем нести ответственность за происхождение и скрытые дефекты запчастей, купленных не через нашу систему контроля по SKU.</p>
+        </div>
+
+        <section style="margin-bottom: 50px;">
+            <h2>Как наступает гарантийный случай?</h2>
+            <p>Никаких бюрократических квестов. При возникновении проблемы:</p>
+            <ol>
+                <li>Напишите нам в Telegram или позвоните.</li>
+                <li>Назовите дату ремонта или номер вашего устройства.</li>
+                <li>Мы проведем экспресс-диагностику в вашем присутствии. Если дефект подтвержден — исправим бесплатно и вне очереди.</li>
+            </ol>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 SmartShop Service. Качество, подтвережденное данными.</p>
+    </footer>
+
+    <div class="contact-buttons">
+        <a href="https://t.me/твой_бот" target="_blank" class="btn-contact btn-tg" data-label="Написать в Telegram">TG</a>
+        <a href="https://max.messenger/твой_id" target="_blank" class="btn-contact btn-max" data-label="Messenger Max">MX</a>
+    </div>
+</body>
+</html>

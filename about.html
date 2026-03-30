@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>О сервисе | SmartShop – Инженерный подход</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* Дополнительные стили специально для этой страницы */
+        .about-hero {
+            padding: 60px 20px;
+            text-align: center;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            border-radius: 30px;
+            margin-bottom: 40px;
+        }
+        .about-content {
+            max-width: 800px;
+            margin: 0 auto;
+            line-height: 1.8;
+            color: #333;
+        }
+        .sku-badge {
+            display: inline-block;
+            background: var(--primary-color);
+            color: white;
+            padding: 5px 15px;
+            border-radius: 50px;
+            font-size: 14px;
+            margin-bottom: 20px;
+        }
+        .expertise-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 40px;
+        }
+        .expertise-card {
+            background: #fff;
+            padding: 25px;
+            border-radius: 20px;
+            border: 1px solid #eee;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+        }
+        .expertise-card h3 {
+            color: var(--primary-color);
+            margin-top: 0;
+        }
+        .quote-block {
+            border-left: 5px solid var(--primary-color);
+            padding-left: 20px;
+            font-style: italic;
+            margin: 40px 0;
+            color: #555;
+        }
+    </style>
+</head>
+<body>
+
+    <header class="header">
+        <nav class="nav-container">
+            <a href="index.html" class="logo">Smart<span>Shop</span></a>
+            <div class="nav-links">
+                <a href="index.html">Главная</a>
+                <a href="about.html" class="active">О сервисе</a>
+                <a href="warranty.html">Гарантия</a>
+                <a href="#contacts">Контакты</a>
+            </div>
+            <a href="tel:+79167266817" class="header-phone">+7 916 726-68-17</a>
+        </nav>
+    </header>
+
+    <main class="container">
+        <section class="about-hero">
+            <span class="sku-badge">Инженерный стандарт 2026</span>
+            <h1>SmartShop — Ремонт, основанный на данных</h1>
+            <p>Мы не просто меняем детали. Мы восстанавливаем заводские характеристики.</p>
+        </section>
+
+        <section class="about-content">
+            <p>Большинство сервисов работают «на ощупь». Мы работаем по регламенту.</p>
+            
+            <p>В мире, где одна и та же модель смартфона может иметь пять разных ревизий дисплея, ошибка в подборе запчасти стоит клиенту времени, а мастеру — репутации. Именно поэтому в основе <strong>SmartShop</strong> лежит не просто верстак с паяльником, а собственная верифицированная база технических данных.</p>
+
+            <div class="quote-block">
+                «Наш принцип: Ремонт — это не замена запчасти, это восстановление устройства с опорой на актуальные технические акты и спецификации».
+            </div>
+
+            <h2>Почему это важно для вас?</h2>
+            
+            <div class="expertise-grid">
+                <div class="expertise-card">
+                    <h3>Идентификация по SKU</h3>
+                    <p>Мы сверяем Hardware ID и артикулы (SKU), чтобы деталь на 100% соответствовала ревизии вашей платы. Никаких фантомных нажатий и проблем с цветом.</p>
+                </div>
+                <div class="expertise-card">
+                    <h3>Архив с 2014 года</h3>
+                    <p>Структурированные данные на Xiaomi, Poco и Huawei за последние 12 лет. Мы знаем всё о Mi 5s и новейших флагманах.</p>
+                </div>
+                <div class="expertise-card">
+                    <h3>Контроль качества</h3>
+                    <p>Каждый аппарат проходит через входную диагностику и выходной контроль по чек-листу из 12 пунктов.</p>
+                </div>
+            </div>
+
+            <h2 style="margin-top: 50px;">Профессиональная прозрачность</h2>
+            <p>Мы ведем строгий учет каждой операции. Вы получаете не «обещание, что будет работать», а документ с четким перечнем выполненных работ и артикулами установленных компонентов.</p>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 SmartShop Service. Инженерный подход к электронике.</p>
+    </footer>
+
+    <div class="contact-buttons">
+        <a href="https://t.me/твой_бот" target="_blank" class="btn-contact btn-tg" data-label="Написать в Telegram">TG</a>
+        <a href="https://max.messenger/твой_id" target="_blank" class="btn-contact btn-max" data-label="Messenger Max">MX</a>
+    </div>
+</body>
+</html>

@@ -8,18 +8,17 @@
 </head>
 <body>
 
-    <header>
-        <div class="nav-container">
-            <div class="logo">SmartShop</div>
-            <nav>
-                <ul>
-                    <li><a href="index.html">Главная</a></li>
-                    <li><a href="prices.html">Цены</a></li>
-                    <li><a href="about.html">О нас</a></li>
-                </ul>
-            </nav>
+    <header class="header">
+        <nav class="nav-container">
+            <a href="index.html" class="logo">Smart<span>Shop</span></a>
+            <div class="nav-links">
+                <a href="index.html" class="active">Главная</a>
+                <a href="about.html">О сервисе</a>
+                <a href="warranty.html">Гарантия</a>
+                <a href="#contacts">Контакты</a>
+            </div>
             <a href="tel:+79167266817" class="header-phone">+7 916 726-68-17</a>
-        </div>
+        </nav>
     </header>
 
     <main>
@@ -35,253 +34,258 @@
             </div>
         </section>
 
-        <!-- SERVICES WITH TABS -->
-        <section id="repair-selector" class="services-section">
-    <h2 class="section-title">Запись на ремонт</h2>
-    <p class="section-subtitle">Выберите ваше устройство, чтобы узнать предварительную стоимость</p>
+    <!-- SERVICES WITH TABS -->
+    <section id="repair-selector" class="services-section">
+        <h2 class="section-title">Запись на ремонт</h2>
+        <p class="section-subtitle">Выберите ваше устройство, чтобы узнать предварительную стоимость</p>
 
-    <div class="selector-container">
-        <div class="selector-step">
-            <span class="step-label">1. Тип устройства</span>
-            <div class="device-grid">
-                <div class="device-item active" onclick="selectDevice('phone')">
-                    <span class="icon">📱</span>
-                    <p>Смартфон</p>
-                </div>
-                <div class="device-item" onclick="selectDevice('laptop')">
-                    <span class="icon">💻</span>
-                    <p>Ноутбук</p>
-                </div>
-                <div class="device-item" onclick="selectDevice('tablet')">
-                    <span class="icon">📲</span>
-                    <p>Планшет</p>
+        <div class="selector-container">
+            <div class="selector-step">
+                <span class="step-label">1. Тип устройства</span>
+                <div class="device-grid">
+                    <div class="device-item active" onclick="selectDevice('phone')">
+                        <span class="icon">📱</span>
+                        <p>Смартфон</p>
+                    </div>
+                    <div class="device-item" onclick="selectDevice('laptop')">
+                        <span class="icon">💻</span>
+                        <p>Ноутбук</p>
+                    </div>
+                    <div class="device-item" onclick="selectDevice('tablet')">
+                        <span class="icon">📲</span>
+                        <p>Планшет</p>
+                    </div>
                 </div>
             </div>
-        </div>
 
-        <div class="selector-step">
-            <span class="step-label">2. Производитель</span>
-            <div id="brand-list" class="brand-grid">
-                <div class="brand-item">Xiaomi</div>
-                <div class="brand-item">Samsung</div>
-                <div class="brand-item">Apple</div>
-                <div class="brand-item">Huawei</div>
-                <div class="brand-item">Honor</div>
-                <div class="brand-item">Poco</div>
+            <div class="selector-step">
+                <span class="step-label">2. Производитель</span>
+                <div id="brand-list" class="brand-grid">
+                    <div class="brand-item">Xiaomi</div>
+                    <div class="brand-item">Samsung</div>
+                    <div class="brand-item">Apple</div>
+                    <div class="brand-item">Huawei</div>
+                    <div class="brand-item">Honor</div>
+                    <div class="brand-item">Poco</div>
+                </div>
             </div>
+
             <div id="model-section" class="selector-step" style="display: none; opacity: 0; transition: opacity 0.3s ease;">
-            <span class="step-label">3. Выберите модель</span>
-            <div id="model-list" class="brand-grid"></div>
+                <span class="step-label">3. Выберите модель</span>
+                <div id="model-list" class="brand-grid"></div>
+            </div>
+
+            <div id="price-section" class="selector-step" style="display: none; opacity: 0; transition: opacity 0.3s ease;">
+                <span class="step-label">4. Доступные услуги и стоимость</span>
+                <div id="price-list" class="services-grid" style="grid-template-columns: 1fr; gap: 15px;"></div>
+            </div>
         </div>
+    </section>
 
-        <div id="price-section" class="selector-step" style="display: none; opacity: 0; transition: opacity 0.3s ease;">
-            <span class="step-label">4. Доступные услуги и стоимость</span>
-            <div id="price-list" class="services-grid" style="grid-template-columns: 1fr; gap: 15px;"></div>
-        </div>
-        </div>
-    </div>
-</section>
-
-        <!-- WHY US SECTION -->
-        <section id="why" class="why-us">
-            <div class="why-us-content">
-                <div class="why-text">
-                    <h2>Почему выбирают SmartShop</h2>
-                    
-                    <div class="benefit-item">
-                        <div class="benefit-icon">✅</div>
-                        <div class="benefit-text">
-                            <h4>Опыт и квалификация</h4>
-                            <p>Мастера с опытом более 10 лет работают с новейшей техникой</p>
-                        </div>
-                    </div>
-
-                    <div class="benefit-item">
-                        <div class="benefit-icon">💯</div>
-                        <div class="benefit-text">
-                            <h4>Качественные материалы</h4>
-                            <p>Используем только оригинальные и лицензированные запчасти</p>
-                        </div>
-                    </div>
-
-                    <div class="benefit-item">
-                        <div class="benefit-icon">⏱️</div>
-                        <div class="benefit-text">
-                            <h4>Быстрый ремонт</h4>
-                            <p>Большинство работ выполняем в течение 1-3 дней</p>
-                        </div>
-                    </div>
-
-                    <div class="benefit-item">
-                        <div class="benefit-icon">🛡️</div>
-                        <div class="benefit-text">
-                            <h4>Гарантия</h4>
-                            <p>Даем гарантию на все виды работ от 1 до 24 месяцев</p>
-                        </div>
+    <!-- WHY US SECTION -->
+    <section id="why" class="why-us">
+        <div class="why-us-content">
+            <div class="why-text">
+                <h2>Почему выбирают SmartShop</h2>
+                
+                <div class="benefit-item">
+                    <div class="benefit-icon">✅</div>
+                    <div class="benefit-text">
+                        <h4>Опыт и квалификация</h4>
+                        <p>Мастера с опытом более 10 лет работают с новейшей техникой</p>
                     </div>
                 </div>
 
-                <div class="why-image">
-                    [Фото сервис-центра или мастера за работой]
+                <div class="benefit-item">
+                    <div class="benefit-icon">💯</div>
+                    <div class="benefit-text">
+                        <h4>Качественные материалы</h4>
+                        <p>Используем только оригинальные и лицензированные запчасти</p>
+                    </div>
+                </div>
+
+                <div class="benefit-item">
+                    <div class="benefit-icon">⏱️</div>
+                    <div class="benefit-text">
+                        <h4>Быстрый ремонт</h4>
+                        <p>Большинство работ выполняем в течение 1-3 дней</p>
+                    </div>
+                </div>
+
+                <div class="benefit-item">
+                    <div class="benefit-icon">🛡️</div>
+                    <div class="benefit-text">
+                        <h4>Гарантия</h4>
+                        <p>Даем гарантию на все виды работ от 1 до 24 месяцев</p>
+                    </div>
                 </div>
             </div>
-        </section>
 
-        <!-- CONTACTS SECTION -->
-        <section id="contacts" class="contacts-section">
-            <div class="contacts-container">
-                <div class="contact-info">
-                    <h2>Контакты</h2>
+            <div class="why-image">
+                [Фото сервис-центра или мастера за работой]
+            </div>
+        </div>
+    </section>
 
-                    <div class="contact-item">
-                        <label>Адрес</label>
-                        <span>Москва, Каширское шоссе, 55к4</span>
-                    </div>
+    <!-- CONTACTS SECTION -->
+    <section id="contacts" class="contacts-section">
+        <div class="contacts-container">
+            <div class="contact-info">
+                <h2>Контакты</h2>
 
-                    <div class="contact-item">
-                        <label>Телефон</label>
-                        <span><a href="tel:+79167266817">+7 916 726-68-17</a></span>
-                    </div>
-
-                    <div class="schedule">
-                        <label style="color: var(--text-secondary); font-size: 12px; text-transform: uppercase;">Режим работы</label>
-                        <p>Пн–пт: 10:00–21:00</p>
-                        <p>Сб–вс: 11:00–20:00</p>
-                    </div>
-
-                    <a href="https://yandex.com/maps/-/CPb5EMPd" target="_blank" class="btn btn-primary" style="margin-top: 30px; display: block; text-align: center;">Открыть на Яндекс.Картах</a>
+                <div class="contact-item">
+                    <label>Адрес</label>
+                    <span>Москва, Каширское шоссе, 55к4</span>
                 </div>
 
-                    <div class="map-container">
-                        <iframe src="https://yandex.ru/map-widget/v1/?ll=37.712133%2C55.639371&z=16&mode=search&ol=geo&ouri=ymapsbm1%3A%2F%2Fgeo%3Fdata%3DCgg1NjY2NTM5NRJC0KDQvtGB0YHQuNGPLCDQnNC-0YHQutCy0LAsINCa0LDRiNC40YDRgdC60L7QtSDRiNC-0YHRgdC1LCA1NcC6NCIKDfclFkIVpaxfQg%3D%3D" width="100%" height="450" frameborder="0" allowfullscreen="true" style="position:relative;"></iframe>
-                    </div>
+                <div class="contact-item">
+                    <label>Телефон</label>
+                    <span><a href="tel:+79167266817">+7 916 726-68-17</a></span>
+                </div>
+
+                <div class="schedule">
+                    <label style="color: var(--text-secondary); font-size: 12px; text-transform: uppercase;">Режим работы</label>
+                    <p>Пн–пт: 10:00–21:00</p>
+                    <p>Сб–вс: 11:00–20:00</p>
+                </div>
+
+                <a href="https://yandex.com/maps/-/CPb5EMPd" target="_blank" class="btn btn-primary" style="margin-top: 30px; display: block; text-align: center;">Открыть на Яндекс.Картах</a>
             </div>
-        </section>
+
+            <div class="map-container">
+                <iframe src="https://yandex.ru/map-widget/v1/?ll=37.712133%2C55.639371&z=16&mode=search&ol=geo&ouri=ymapsbm1%3A%2F%2Fgeo%3Fdata%3DCgg1NjY2NTM5NRJC0KDQvtGB0YHQuNGPLCDQnNC-0YHQutCy0LAsINCa0LDRiNC40YDRgdC60L7QtSDRiNC-0YHRgdC1LCA1NcC6NCIKDfclFkIVpaxfQg%3D%3D" width="100%" height="450" frameborder="0" allowfullscreen="true" style="position:relative;"></iframe>
+            </div>
+        </div>
+    </section>
     </main>
 
     <footer>
         <p>&copy; 2026 SmartShop. Профессиональный ремонт электроники в Москве</p>
         <p style="font-size: 14px; color: #aaa;">Все права защищены</p>
     </footer>
-<script>
-    // 1. Расширенная база данных
-    const database = {
-        'Xiaomi': {
-            'Redmi Note 8 2021': [
-                { service: 'Замена дисплейного модуля (Оригинал)', price: 'от 3 500 ₽', time: '1-2 часа' },
-                { service: 'Замена аккумулятора', price: 'от 1 800 ₽', time: '40 мин' }
-            ],
-            'Mi 5s': [
-                { service: 'Замена разъема питания', price: 'от 1 500 ₽', time: '1 час' },
-                { service: 'Восстановление после воды', price: 'от 2 500 ₽', time: '1-3 дня' }
-            ],
-            'Poco X3 Pro': [
-                { service: 'Реболл процессора (Типовая болячка)', price: 'от 4 500 ₽', time: '1-2 дня' },
-                { service: 'Замена дисплея', price: 'от 3 800 ₽', time: '2 часа' }
-            ]
-        },
-        'Apple': {
-            'iPhone 13': [
-                { service: 'Переклейка стекла (сохранение ориг. матрицы)', price: 'от 6 000 ₽', time: '1 день' }
-            ]
+
+    <div class="contact-buttons">
+        <a href="https://t.me/твой_бот" target="_blank" class="btn-contact btn-tg" data-label="Написать в Telegram">TG</a>
+        <a href="https://max.messenger/твой_id" target="_blank" class="btn-contact btn-max" data-label="Messenger Max">MX</a>
+    </div>
+
+    <script>
+        // Database of services
+        const database = {
+            'Xiaomi': {
+                'Redmi Note 8 2021': [
+                    { service: 'Замена дисплейного модуля (Оригинал)', price: 'от 3 500 ₽', time: '1-2 часа' },
+                    { service: 'Замена аккумулятора', price: 'от 1 800 ₽', time: '40 мин' }
+                ],
+                'Mi 5s': [
+                    { service: 'Замена разъема питания', price: 'от 1 500 ₽', time: '1 час' },
+                    { service: 'Восстановление после воды', price: 'от 2 500 ₽', time: '1-3 дня' }
+                ],
+                'Poco X3 Pro': [
+                    { service: 'Реболл процессора (Типовая болячка)', price: 'от 4 500 ₽', time: '1-2 дня' },
+                    { service: 'Замена дисплея', price: 'от 3 800 ₽', time: '2 часа' }
+                ]
+            },
+            'Apple': {
+                'iPhone 13': [
+                    { service: 'Переклейка стекла (сохранение ориг. матрицы)', price: 'от 6 000 ₽', time: '1 день' }
+                ]
+            }
+        };
+
+        const brandsData = {
+            phone: ['Xiaomi', 'Apple', 'Samsung', 'Honor'],
+            laptop: ['ASUS', 'HP', 'MacBook'],
+            tablet: ['iPad', 'Xiaomi Pad']
+        };
+
+        // Helper functions
+        function hideSection(id) {
+            const el = document.getElementById(id);
+            el.style.opacity = '0';
+            setTimeout(() => el.style.display = 'none', 300);
         }
-        // Сюда будешь добавлять остальные бренды и модели
-    };
 
-    const brandsData = {
-        phone: ['Xiaomi', 'Apple', 'Samsung', 'Honor'],
-        laptop: ['ASUS', 'HP', 'MacBook'],
-        tablet: ['iPad', 'Xiaomi Pad']
-    };
+        function showSection(id) {
+            const el = document.getElementById(id);
+            el.style.display = 'block';
+            setTimeout(() => el.style.opacity = '1', 10);
+        }
 
-    // Вспомогательные функции для скрытия блоков
-    function hideSection(id) {
-        const el = document.getElementById(id);
-        el.style.opacity = '0';
-        setTimeout(() => el.style.display = 'none', 300);
-    }
+        // Step 1: Select device type
+        function selectDevice(deviceType) {
+            document.querySelectorAll('.device-item').forEach(item => item.classList.remove('active'));
+            event.currentTarget.classList.add('active');
 
-    function showSection(id) {
-        const el = document.getElementById(id);
-        el.style.display = 'block';
-        setTimeout(() => el.style.opacity = '1', 10);
-    }
-
-    // Шаг 1: Выбор устройства
-    function selectDevice(deviceType) {
-        document.querySelectorAll('.device-item').forEach(item => item.classList.remove('active'));
-        event.currentTarget.classList.add('active');
-
-        const brandList = document.getElementById('brand-list');
-        brandList.innerHTML = '';
-        
-        hideSection('model-section');
-        hideSection('price-section');
-
-        brandsData[deviceType].forEach(brandName => {
-            const div = document.createElement('div');
-            div.className = 'brand-item';
-            div.innerText = brandName;
+            const brandList = document.getElementById('brand-list');
+            brandList.innerHTML = '';
             
-            div.onclick = function() {
-                document.querySelectorAll('.brand-item').forEach(b => b.classList.remove('active'));
-                this.classList.add('active');
-                selectBrand(brandName); // Вызываем следующий шаг
-            };
-            brandList.appendChild(div);
-        });
-    }
+            hideSection('model-section');
+            hideSection('price-section');
 
-    // Шаг 2: Выбор бренда и показ моделей
-    function selectBrand(brandName) {
-        hideSection('price-section'); // Прячем цены, если выбрали другой бренд
-        const modelList = document.getElementById('model-list');
-        modelList.innerHTML = '';
-
-        if (database[brandName]) {
-            Object.keys(database[brandName]).forEach(modelName => {
+            brandsData[deviceType].forEach(brandName => {
                 const div = document.createElement('div');
-                div.className = 'brand-item'; // Используем тот же стиль кнопок
-                div.innerText = modelName;
+                div.className = 'brand-item';
+                div.innerText = brandName;
                 
                 div.onclick = function() {
-                    document.querySelectorAll('#model-list .brand-item').forEach(b => b.classList.remove('active'));
+                    document.querySelectorAll('.brand-item').forEach(b => b.classList.remove('active'));
                     this.classList.add('active');
-                    showPrices(brandName, modelName); // Вызываем финал
+                    selectBrand(brandName);
                 };
-                modelList.appendChild(div);
+                brandList.appendChild(div);
             });
-            showSection('model-section');
-        } else {
-            modelList.innerHTML = '<p style="color: #666; padding: 20px;">Модели этого бренда скоро появятся в базе.</p>';
-            showSection('model-section');
         }
-    }
 
-    // Шаг 3: Показ цен
-    function showPrices(brandName, modelName) {
-        const priceList = document.getElementById('price-list');
-        priceList.innerHTML = '';
+        // Step 2: Select brand and show models
+        function selectBrand(brandName) {
+            hideSection('price-section');
+            const modelList = document.getElementById('model-list');
+            modelList.innerHTML = '';
 
-        const services = database[brandName][modelName];
-        
-        services.forEach(item => {
-            const div = document.createElement('div');
-            // Делаем карточку услуги в виде строки
-            div.style.cssText = 'display: flex; justify-content: space-between; align-items: center; padding: 20px; background: #fff; border: 1px solid #e0e0e0; border-radius: 12px; margin-bottom: 10px;';
-            div.innerHTML = `
-                <div>
-                    <h4 style="margin: 0; font-size: 16px;">${item.service}</h4>
-                    <span style="font-size: 13px; color: #666;">⏱ Время работы: ${item.time}</span>
-                </div>
-                <div style="font-size: 18px; font-weight: 700; color: #0066cc;">
-                    ${item.price}
-                </div>
-            `;
-            priceList.appendChild(div);
-        });
-        showSection('price-section');
-    }
-</script>
+            if (database[brandName]) {
+                Object.keys(database[brandName]).forEach(modelName => {
+                    const div = document.createElement('div');
+                    div.className = 'brand-item';
+                    div.innerText = modelName;
+                    
+                    div.onclick = function() {
+                        document.querySelectorAll('#model-list .brand-item').forEach(b => b.classList.remove('active'));
+                        this.classList.add('active');
+                        showPrices(brandName, modelName);
+                    };
+                    modelList.appendChild(div);
+                });
+                showSection('model-section');
+            } else {
+                modelList.innerHTML = '<p style="color: #666; padding: 20px;">Модели этого бренда скоро появятся в базе.</p>';
+                showSection('model-section');
+            }
+        }
+
+        // Step 3: Show prices
+        function showPrices(brandName, modelName) {
+            const priceList = document.getElementById('price-list');
+            priceList.innerHTML = '';
+
+            const services = database[brandName][modelName];
+            
+            services.forEach(item => {
+                const div = document.createElement('div');
+                div.style.cssText = 'display: flex; justify-content: space-between; align-items: center; padding: 20px; background: #fff; border: 1px solid #e0e0e0; border-radius: 12px; margin-bottom: 10px;';
+                div.innerHTML = `
+                    <div>
+                        <h4 style="margin: 0; font-size: 16px;">${item.service}</h4>
+                        <span style="font-size: 13px; color: #666;">⏱ Время работы: ${item.time}</span>
+                    </div>
+                    <div style="font-size: 18px; font-weight: 700; color: #0066cc;">
+                        ${item.price}
+                    </div>
+                `;
+                priceList.appendChild(div);
+            });
+            showSection('price-section');
+        }
+    </script>
 </body>
 </html>

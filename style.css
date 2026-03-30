@@ -1,5 +1,4 @@
-    <style>
-        :root {
+:root {
             --primary-color: #0066cc;
             --accent-color: #ff6b35;
             --bg-color: #f8f9fa;
@@ -158,6 +157,11 @@
             background: var(--primary-color);
             color: white;
         }
+
+        .container {
+            margin-top: 70px;
+        }
+
 
         /* ===== TABS/SERVICES SECTION ===== */
         .services-section {
@@ -489,5 +493,57 @@
     background: var(--primary-color) !important;
     color: white !important;
     border-color: var(--primary-color) !important;
+}
 
-    </style>
+/* Контейнер для кнопок связи */
+.contact-buttons {
+    position: fixed;
+    bottom: 25px;
+    right: 25px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    z-index: 1000;
+}
+
+.btn-contact {
+    width: 55px;
+    height: 55px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    color: white;
+    font-weight: bold;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    font-size: 14px;
+}
+
+.btn-contact:hover {
+    transform: scale(1.1) translateY(-3px);
+    box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+}
+
+.btn-tg { background-color: #26A5E4; }
+.btn-max { background-color: #0066FF; }
+
+/* Подсказки при наведении */
+.btn-contact::after {
+    content: attr(data-label);
+    position: absolute;
+    right: 70px;
+    background: #333;
+    padding: 5px 12px;
+    border-radius: 6px;
+    font-size: 12px;
+    white-space: nowrap;
+    opacity: 0;
+    transition: opacity 0.3s;
+    pointer-events: none;
+}
+
+.btn-contact:hover::after {
+    opacity: 1;
+}
