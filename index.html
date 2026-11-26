@@ -15,7 +15,6 @@
             <div class="nav-links" id="nav-links">
                 <a class="is-current" href="index.html">Главная</a>
                 <a href="about.html">О сервисе</a>
-                <a href="calculator.html">Калькулятор</a>
                 <a href="warranty.html">Гарантия</a>
                 <a href="#contacts">Контакты</a>
             </div>
@@ -26,69 +25,12 @@
     <section class="hero">
         <div class="hero-inner">
             <h1>Ремонт смартфонов и ноутбуков</h1>
-            <p class="lead">SmartShop на Каширском шоссе. Выберите устройство и посмотрите стоимость работы, затем позвоните — запишем на ремонт.</p>
+            <p class="lead">SmartShop на Каширском шоссе. Позвоните — запишем на ремонт и назовём стоимость.</p>
             <div class="actions">
-                <a class="btn btn-primary" href="#repair-selector">Рассчитать стоимость</a>
-                <a class="btn btn-secondary" href="tel:+79167266817">Позвонить</a>
+                <a class="btn btn-primary" href="tel:+79167266817">Позвонить</a>
+                <a class="btn btn-secondary" href="#contacts">Адрес</a>
             </div>
         </div>
-    </section>
-
-    <section class="section" id="repair-selector">
-        <div id="repair-root">
-            <h2>Стоимость работы</h2>
-            <p class="section-note">Сначала тип устройства, затем бренд, модель и услуга. В каталоге — стоимость работы. Для замены дисплея и запчасти цена детали называется отдельно.</p>
-            <div class="panel">
-                <div class="step">
-                    <p class="step-label">Тип устройства</p>
-                    <div class="device-type-grid">
-                        <button class="device-type-btn" type="button" data-action="type" data-type="Телефон">Смартфоны</button>
-                        <button class="device-type-btn" type="button" data-action="type" data-type="Планшет">Планшеты</button>
-                        <button class="device-type-btn" type="button" data-action="type" data-type="Ноутбук">Ноутбуки</button>
-                    </div>
-                    <button class="text-btn" type="button" data-action="toggle-other">Другие устройства</button>
-                    <div id="other-types" class="device-type-grid" hidden>
-                        <button class="device-type-btn" type="button" data-action="type" data-type="Компьютер">Компьютеры</button>
-                        <button class="device-type-btn" type="button" data-action="type" data-type="Часы">Часы</button>
-                        <button class="device-type-btn" type="button" data-action="type" data-type="Наушники">Наушники</button>
-                        <button class="device-type-btn" type="button" data-action="type" data-type="Колонка">Колонки</button>
-                        <button class="device-type-btn" type="button" data-action="type" data-type="Игровая консоль">Консоли</button>
-                    </div>
-                </div>
-                <div class="step" id="brand-step">
-                    <p class="step-label">Бренд</p>
-                    <div id="brand-list" class="choice-grid">
-                        <p class="status-line">Загружаем каталог…</p>
-                    </div>
-                </div>
-                <div class="step" id="series-step" hidden>
-                    <p class="step-label">Серия</p>
-                    <div id="series-list" class="choice-grid"></div>
-                </div>
-                <div class="step" id="model-step" hidden>
-                    <p class="step-label">Модель</p>
-                    <div id="model-list" class="choice-grid"></div>
-                </div>
-                <div class="step" id="price-step" hidden>
-                    <p class="step-label">Услуга</p>
-                    <p class="model-caption" id="model-caption"></p>
-                    <div id="service-list" class="service-list"></div>
-                    <div class="price-result" id="price-result" hidden>
-                        <h3 id="price-result-title"></h3>
-                        <p class="price-sum" id="price-result-sum"></p>
-                        <p id="price-result-note"></p>
-                        <a class="btn btn-primary" href="tel:+79167266817">Позвонить и записаться</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section class="section" id="model-search-section">
-        <h2>Поиск модели</h2>
-        <p class="section-note">Если бренд уже известен, начните вводить название. Результат откроет услуги и цену работы.</p>
-        <input id="model-search" class="search-input" type="search" placeholder="Например, iPhone 12 или Galaxy A" autocomplete="off">
-        <div id="search-results" class="choice-grid" style="margin-top: 16px;"></div>
     </section>
 
     <section class="section">
@@ -96,7 +38,7 @@
         <div class="cards">
             <article class="card">
                 <h3>Разбитый дисплей</h3>
-                <p>Меняем модуль дисплея. Стоимость работы есть в калькуляторе, деталь считаем отдельно.</p>
+                <p>Меняем модуль дисплея. Стоимость назовём по телефону.</p>
             </article>
             <article class="card">
                 <h3>Устройство намокло</h3>
@@ -156,6 +98,6 @@
         <p>SmartShop · Москва, Каширское шоссе, 55к4</p>
     </footer>
     <a class="call-fab" href="tel:+79167266817">Позвонить</a>
-    <script src="catalog.js"></script>
+    <script src="nav.js"></script>
 </body>
 </html>
