@@ -239,7 +239,8 @@ img { max-width: 100%; }
 }
 
 .route-hint,
-.request-form { grid-column: 1 / -1; }
+.request-form,
+.messengers { grid-column: 1 / -1; }
 
 .route-hint {
     margin: 0;
@@ -357,4 +358,195 @@ img { max-width: 100%; }
 @media (prefers-reduced-motion: reduce) {
     html { scroll-behavior: auto; }
     * { transition: none !important; }
+}
+
+/* Монохром публичных страниц. /staff/ без класса site не меняется. */
+body.site {
+    --ink: #000000;
+    --muted: #1d1d1b;
+    --line: #c7c7c7;
+    --paper: #ffffff;
+    --card: #ffffff;
+    --blue: #000000;
+    --blue-deep: #000000;
+    --violet: #1d1d1b;
+    --soft: #f4f4f4;
+    color: #000000;
+    background-color: #ffffff;
+    background-image: url("assets/watermark.webp");
+    background-repeat: repeat;
+    background-size: 260px 220px;
+    font-family: "Century Gothic", CenturyGothic, Futura, "Trebuchet MS", "Segoe UI", sans-serif;
+}
+
+body.site .header {
+    background: #ffffff;
+    border-bottom: 1px solid #c7c7c7;
+    box-shadow: none;
+}
+
+body.site .hero {
+    background: transparent;
+    padding: 48px 20px 24px;
+}
+
+body.site .section { background: transparent; }
+
+body.site a { color: #000000; }
+
+body.site .nav-links a { color: #1d1d1b; }
+
+body.site .header-phone { color: #000000; }
+
+body.site .btn-primary,
+body.site .call-fab {
+    background: #000000;
+    color: #ffffff;
+    border-radius: 14px;
+    filter: none;
+    box-shadow: none;
+}
+
+body.site .btn-secondary {
+    background: #ffffff;
+    color: #000000;
+    border-color: #000000;
+    border-radius: 14px;
+}
+
+body.site .card,
+body.site .review,
+body.site .contacts {
+    background: #ffffff;
+    border-color: #c7c7c7;
+    box-shadow: none;
+}
+
+body.site .quote { border-left-color: #000000; }
+
+body.site .map-slot { background: #f4f4f4; }
+
+body.site .form-status.is-ok,
+body.site .form-status.is-error { color: #000000; }
+
+.service-list { margin: 0; padding-left: 1.2em; }
+
+.service-list li { margin: 6px 0; font-size: 18px; }
+
+.price-note { font-weight: 700; }
+
+.steps { padding-left: 1.2em; }
+
+.steps li { margin: 10px 0; }
+
+.faq details {
+    background: #ffffff;
+    border: 1px solid #c7c7c7;
+    border-radius: 14px;
+    padding: 12px 16px;
+    margin: 10px 0;
+}
+
+.faq summary {
+    cursor: pointer;
+    font-weight: 700;
+    font-size: 18px;
+}
+
+.faq details p { margin: 10px 0 4px; }
+
+.terms { background: #ffffff; }
+
+.messengers { display: grid; gap: 0; padding: 0 28px 8px; }
+
+.msg-row {
+    display: grid;
+    grid-template-columns: 1fr 200px;
+    gap: 20px;
+    align-items: center;
+    padding: 22px 0;
+    border-top: 1px solid #c7c7c7;
+}
+
+.msg-row.flip { grid-template-columns: 200px 1fr; }
+
+.msg-row.flip .msg-copy { order: 2; }
+
+.msg-copy h3 { margin: 0 0 6px; font-size: 28px; }
+
+.msg-copy p { margin: 0 0 12px; font-size: 18px; }
+
+.msg-btn {
+    display: inline-flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.msg-btn img { width: 24px; height: 24px; }
+
+.qr-link { justify-self: center; }
+
+.qr-link img {
+    width: 180px;
+    height: 180px;
+    background: #ffffff;
+    display: block;
+}
+
+.email-line {
+    margin: 0;
+    padding: 22px 0 8px;
+    border-top: 1px solid #a6a6a6;
+    text-align: center;
+    font-size: 20px;
+    font-weight: 700;
+}
+
+.dock { display: none; }
+
+@media (max-width: 860px) {
+    body.site .dock {
+        position: fixed;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        z-index: 40;
+        display: flex;
+        gap: 6px;
+        padding: 8px;
+        background: #ffffff;
+        border-top: 1px solid #c7c7c7;
+    }
+
+    body.site .dock a {
+        flex: 1;
+        min-height: 48px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 4px;
+        background: #000000;
+        color: #ffffff;
+        text-decoration: none;
+        border-radius: 12px;
+        font-size: 12px;
+        font-weight: 700;
+    }
+
+    body.site .dock img { width: 18px; height: 18px; }
+
+    body.site .call-fab { display: none; }
+
+    body.site { padding-bottom: 72px; }
+
+    .msg-row,
+    .msg-row.flip {
+        grid-template-columns: 1fr;
+    }
+
+    .msg-row.flip .msg-copy { order: 0; }
+
+    .qr-link img { width: 120px; height: 120px; }
+
+    .msg-btn { width: 100%; justify-content: center; }
 }
