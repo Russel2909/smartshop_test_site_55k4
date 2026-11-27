@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Флешка Ventoy</title>
+<style>
+  body { margin: 0; background: #f4f5f7; color: #1d2330; font: 16px/1.5 "Segoe UI", Arial, sans-serif; }
+  .wrap { max-width: 880px; margin: 0 auto; padding: 20px 16px 40px; }
+  h1 { font-size: 28px; margin: 14px 0 4px; }
+  .sub { color: #5b6475; margin: 0 0 8px; }
+  h2 { font-size: 20px; margin: 30px 0 10px; padding-top: 6px; border-top: 2px solid #dde1e8; }
+  .card { background: #fff; border: 1px solid #dde1e8; border-radius: 10px; padding: 16px 20px; margin: 0 0 14px; }
+  .card h3 { margin: 0 0 6px; font-size: 18px; }
+  .tag { display: inline-block; font-size: 12px; padding: 1px 8px; border-radius: 10px; background: #e7ecf7; color: #2f4a8a; margin-left: 6px; vertical-align: middle; font-weight: 600; }
+  ol, ul { margin: 6px 0; padding-left: 22px; }
+  li { margin: 3px 0; }
+  a { color: #2f4a8a; }
+  code { background: #eef0f4; padding: 1px 5px; border-radius: 4px; font-family: Consolas, monospace; font-size: 14px; }
+  table { border-collapse: collapse; width: 100%; }
+  td, th { border-top: 1px solid #e6e9ee; padding: 6px 10px 6px 0; vertical-align: top; text-align: left; }
+  td:first-child { font-weight: 600; white-space: nowrap; }
+  .muted { color: #5b6475; font-size: 14px; }
+  .grid { display: flex; flex-wrap: wrap; margin: 0 -7px; }
+  .grid .card { flex: 1 1 240px; margin: 0 7px 14px; }
+  .steps > ol > li { margin: 0 0 12px; }
+  .steps ul { color: #3a4253; font-size: 15px; }
+  .warn { background: #fff6e5; border-color: #f0d49b; }
+  .danger { background: #fdecec; border-color: #eab3b3; }
+  .danger h3 { color: #a12b2b; }
+  .topbar { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; background: #1f2f57; color: #fff; border-radius: 10px; padding: 12px 16px; }
+  .topbar span { flex: 1 1 260px; font-size: 15px; }
+  .btn { display: inline-block; background: #2f4a8a; color: #fff; text-decoration: none; padding: 8px 16px; border-radius: 6px; font-weight: 600; }
+  .btn:hover { background: #24396b; }
+  .topbar .btn { background: #ffd34d; color: #1d2330; }
+  .topbar .btn:hover { background: #ffc61a; }
+  .modal { display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; z-index: 10; }
+  .modal:target { display: block; }
+  .modal-bg { position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: rgba(15,20,30,.55); }
+  .modal-box { position: relative; max-width: 740px; max-height: 88vh; overflow: auto; margin: 5vh auto 0; background: #fff; border-radius: 10px; padding: 20px 22px; box-shadow: 0 10px 40px rgba(0,0,0,.3); }
+  .modal-x { position: absolute; top: 8px; right: 14px; font-size: 28px; text-decoration: none; color: #5b6475; }
+  .keys th { padding: 14px 0 4px; font-size: 15px; border-top: 0; }
+  .keys .hd td { color: #5b6475; font-size: 13px; border-top: 0; }
+  .keys td { font-size: 15px; }
+  .keys td:first-child { white-space: normal; }
+  .keys i, td i { color: #5b6475; font-style: normal; font-size: 13px; }
+  .tips li { margin: 5px 0; }
+  @media (max-width: 600px) { .modal-box { margin: 0; max-height: 100vh; border-radius: 0; } td:first-child { white-space: normal; } }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<!-- 1. Кнопка Boot / BIOS -->
+<div class="topbar">
+  <span><b>Как загрузиться с флешки?</b> Клавиши Boot Menu и BIOS для всех популярных ноутбуков и плат.</span>
+  <a class="btn" href="#keys">Клавиши Boot и BIOS</a>
+  <a class="btn" href="#special">Особые случаи</a>
+</div>
+
+<!-- 2. Описание -->
+<h1>Установочная флешка Windows</h1>
+<p class="sub">Флешка Ventoy ~32 ГБ: три версии Windows, частичная автоустановка, набор программ и сервисных утилит. Грузится на любых ПК — в режиме UEFI и в Legacy BIOS.</p>
+
+<h2>Образы</h2>
+<div class="grid">
+  <div class="card">
+    <h3>Windows 11 25H2 <span class="tag">2018 и новее</span></h3>
+    <p>Полноценная актуальная система для новых устройств. Без проверки TPM и Secure Boot, без аккаунта Microsoft. Лишние встроенные приложения и реклама убираются при установке.</p>
+  </div>
+  <div class="card">
+    <h3>Windows 10 IoT LTSC 2021 <span class="tag">2011–2019</span></h3>
+    <p>Облегчённая Windows 10 без Магазина и встроенных приложений — для ПК старше 2020 года и слабого железа. Обновления безопасности до 2032 года.</p>
+  </div>
+  <div class="card">
+    <h3>Windows 7 SP1 x64 <span class="tag">до 2011–2012</span></h3>
+    <p>Для очень старых ПК: Core 2, первые Core i, до 4 ГБ памяти. Новее 2012 года — уже Windows 10: нет драйверов USB 3.0 и NVMe.</p>
+  </div>
+  <div class="card">
+    <h3>WinPE Sergei Strelec <span class="tag">реанимация</span></h3>
+    <p>Живая Windows с флешки, без установки: спасение файлов, разметка и клонирование дисков, сброс пароля, восстановление загрузки, проверка железа и вирусов. Не устанавливает систему.</p>
+  </div>
+</div>
+
+<div class="card">
+<table>
+  <tr><td>Сертификаты и сайты</td><td><b>Windows 7</b> получает полный пакет обновлений UpdatePack7R2, свежие корневые сертификаты, TLS 1.2, .NET 4.8 и современный браузер — открываются сайты, работают программы и мессенджеры. <b>Windows 10/11</b> — поддерживаемые системы, сертификаты обновляются сами через Центр обновления.</td></tr>
+  <tr><td>Автоустановка</td><td>Вручную — только выбор диска (и редакции в Win11). Остальное ставится само: учётная запись, настройки, программы.</td></tr>
+  <tr><td>Программы</td><td>Браузеры, архиватор, видео- и фотопросмотрщики, PDF, системные библиотеки.</td></tr>
+  <tr><td>Утилиты</td><td>Папка «Сервис»: диагностика, диски, лечение от вирусов, драйверы. Без установки, лёгкая копия кладётся на рабочий стол.</td></tr>
+</table>
+</div>
+
+<!-- 3. Порядок установки -->
+<h2>Порядок установки</h2>
+<div class="card steps">
+<ol>
+  <li><b>Загрузка с флешки.</b> Вставьте флешку, включите ПК, вызовите Boot Menu (<a href="#keys">клавиши</a>) и выберите флешку.
+    <ul>
+      <li>Режим определяет разметку системного диска: в <b>UEFI</b> Windows ставится только на диск <b>GPT</b>, в <b>Legacy</b> — только на <b>MBR</b>. Текущий режим показан внизу меню Ventoy.</li>
+      <li>Windows 10/11 — <b>UEFI</b>. Windows 7 и старые ПК без UEFI — <b>Legacy</b>.</li>
+      <li>Флешка может быть в списке дважды: с пометкой <code>UEFI:</code> — загрузка в UEFI, без неё — в Legacy.</li>
+    </ul>
+  </li>
+  <li><b>Выбор образа.</b> Выберите образ в меню Ventoy → Enter. В следующем меню выделен шаблон автоустановки → Enter.
+    <ul><li>Ручная установка без автоматики — пункт без шаблона.</li></ul>
+  </li>
+  <li><b>Работа с диском</b> — окно «Где вы хотите установить Windows?».
+    <ul>
+      <li>Диски нумеруются: <b>Диск 0, Диск 1…</b> У каждого — свои разделы. Ориентируйтесь по размеру: определите, какой диск системный (обычно SSD), а какой — флешка и диски с данными.</li>
+      <li><b>Новый или чистый диск:</b> выберите «Незанятое пространство» → «Далее». Служебные разделы создадутся сами.</li>
+      <li><b>Переустановка:</b> на системном диске удалите разделы старой Windows (системный, MSR, восстановления, основной), выберите появившееся незанятое пространство → «Далее».</li>
+      <li><b>Сохранить данные:</b> разделы с документами (бывший D:) не удаляйте и не форматируйте.</li>
+      <li><b>Ошибка «выбранный диск имеет стиль разделов GPT/MBR»:</b> диск размечен под другой режим. Удалите на нём все разделы — установщик переразметит его сам. Либо перезагрузитесь в другом режиме (шаг 1).</li>
+      <li><b>Список дисков пуст или нет родного диска ноутбука</b> — см. <a href="#special">Особые случаи → «Установщик не видит диск»</a>.</li>
+    </ul>
+  </li>
+  <li><b>Редакция</b> — только в Windows 11: «У меня нет ключа продукта» → <b>Pro</b>.</li>
+  <li><b>Автоматическая часть.</b> Создаётся учётная запись <b>User</b> (администратор, без пароля), выполняется вход, открывается окно «Донастройка Windows»: настройки, программы, перезагрузка.
+    <ul>
+      <li>Windows 11 и LTSC — ориентировочно 20–40 минут.</li>
+      <li>Windows 7 — 1–2 часа, несколько перезагрузок: сначала обновления, потом программы.</li>
+    </ul>
+  </li>
+  <li><b>Готово</b>, когда после последней перезагрузки на рабочем столе есть «Что делать после установки.txt» и папка «Сервис». В нём — дальнейшие шаги: драйверы, обновления, проверка ПК, активация.</li>
+</ol>
+</div>
+
+<div class="card danger">
+<h3>⚠ Внимание</h3>
+<ul>
+  <li><b>Флешка видна в списке дисков</b> — примерно <b>29 ГБ</b> (флешка 32 ГБ). Не удаляйте на ней разделы: пропадут образы и вся автоустановка. Если сомневаетесь, какой диск системный, — отключите лишние диски.</li>
+  <li><b>Удаление раздела стирает его данные</b> безвозвратно. Перед удалением проверьте размер и номер диска.</li>
+  <li><b>Не вынимайте флешку</b>, не закрывайте окно «Донастройка Windows» и не выключайте ПК, пока окно открыто: программы ставятся с флешки.</li>
+</ul>
+</div>
+
+<div class="card warn">
+<h3>Полезно знать</h3>
+<p><a class="btn" href="#special">Особые случаи: нет диска, нет Wi-Fi, Snapdragon, BitLocker, Home вместо Pro…</a></p>
+<ul class="tips">
+  <li><b>Перед установкой:</b> сохраните данные владельца (WinPE на этой флешке грузится без установки), ноутбук — на зарядке, диск не зашифрован BitLocker.</li>
+  <li><b>Лицензия в BIOS:</b> Windows 10/11 той же редакции, что была с завода (Home → Home, Pro → Pro), активируется сама при подключении к интернету. LTSC и Windows 7 этим ключом не активируются.</li>
+  <li><b>Дата и время в BIOS:</b> неверная дата (севшая батарейка на старых ПК) — ошибки сертификатов, не открываются сайты, не ставятся обновления. Проверьте до установки.</li>
+  <li><b>Ноутбук с Windows по гарантии:</b> переустановка стирает раздел восстановления производителя — сначала уточните у владельца.</li>
+  <li><b>Windows 7:</b> режим Legacy/CSM и порт <b>USB 2.0</b> (чёрный). На синих портах USB 3.0 флешка, клавиатура и мышь могут не работать.</li>
+  <li><b>Не успеваете нажать клавишу</b> (быстрая загрузка): из Windows — Пуск → Выключение → <b>Shift + «Перезагрузка»</b> → Поиск и устранение неисправностей → Дополнительные параметры → Параметры встроенного ПО UEFI.</li>
+  <li><b>Синий экран «Verification failed» (Secure Boot):</b> отключите Secure Boot в BIOS (вкладка Security или Boot) либо OK → «Enroll key from disk» → VTOYEFI → <code>ENROLL_THIS_KEY_IN_MOKMANAGER.cer</code> → Continue → Yes → Reboot (один раз на ПК).</li>
+  <li><b>Флешки нет в списке для Windows 7:</b> включите в BIOS CSM / Legacy Support (иногда сначала нужно отключить Secure Boot).</li>
+  <li><b>Активации нет</b> ни в одной системе — выполняется отдельно.</li>
+  <li><b>Что-то не установилось</b> — журнал <code>C:\Windows\Temp\postinstall.log</code>.</li>
+</ul>
+</div>
+
+<!-- Окно: особые случаи -->
+<div id="special" class="modal">
+  <a href="#" class="modal-bg" aria-label="Закрыть"></a>
+  <div class="modal-box">
+    <a href="#" class="modal-x" aria-label="Закрыть">×</a>
+    <h3>Особые случаи</h3>
+    <p class="muted">Проблемы конкретных ноутбуков и неподходящих сборок Windows — при установке и после неё.</p>
+
+<div class="card" id="nodisk">
+<h3>Установщик не видит диск <span class="tag">Thunderobot и др.</span></h3>
+<p>Ноутбук на Intel <b>11-го поколения и новее</b>, в BIOS диск есть, а в окне выбора диска пусто или только флешка. Причина — режим <b>Intel VMD / RST</b>: диск работает через контроллер, драйвера которого нет в установщике Windows.</p>
+<p class="muted">Чаще всего: Thunderobot и другие китайские игровые ноутбуки (Machenike, Mechrevo и т. п.); Dell (Inspiron, Vostro, Latitude, XPS), HP (Pavilion, Envy, Omen), ASUS (Zenbook, Vivobook, ROG), Lenovo (IdeaPad, Yoga, ThinkPad), Acer (Swift, Aspire), MSI, dynabook. На Intel Core Ultra 200V (Lunar Lake) и новее проблемы обычно нет.</p>
+<ol>
+  <li><b>Отключить VMD в BIOS</b> — самый простой путь. Пункт обычно в Advanced → System Agent / Storage / VMD Setup Menu: <b>Enable VMD controller → Disabled</b> (или режим SATA: <b>AHCI</b> вместо RAID/RST). Сохранить (F10), загрузиться с флешки заново — диск появится.<br>
+    <span class="muted">Только для чистой установки: на уже установленной Windows смена режима ломает загрузку. У части моделей (в т. ч. Thunderobot) пункта может не быть — тогда шаг 2.</span></li>
+  <li><b>Загрузить драйвер в установщике.</b> В окне выбора диска — «Загрузить драйвер» → «Обзор» → папка с драйвером Intel RST VMD (файл <code>iaStorVD.inf</code>) → выбрать <b>Intel RST VMD Controller</b> → «Далее». Диск появится в списке.<br>
+    <span class="muted">Драйвер — с сайта производителя по модели ноутбука (раздел Storage / Chipset / Intel RST) или с сайта Intel, распакованный, на любой флешке. Если не встал — попробуйте другую версию: старые драйверы не работают на Intel 12–14-го поколения.</span></li>
+  <li><b>Через WinPE</b> на этой флешке: в WinPE Sergei Strelec драйверы Intel RST/VMD, как правило, уже встроены — им можно разметить диск, перенести данные или проверить, что SSD исправен.</li>
+</ol>
+</div>
+
+<div class="card" id="nowifi">
+<h3>После установки нет Wi-Fi <span class="tag">Huawei, Honor и др.</span></h3>
+<p>Windows не знает сетевую карту ноутбука: в Диспетчере устройств «Сетевой контроллер» с жёлтым значком, значка Wi-Fi нет. Типично для Huawei MateBook и Honor MagicBook (Intel AX201/AX211, Realtek, Qualcomm), а также Xiaomi и китайских ноутбуков.</p>
+<ol>
+  <li><b>Intel Wi-Fi</b> — драйвер уже есть: «Сервис\Драйверы\Сеть\WiFi-24.80…exe» на рабочем столе.</li>
+  <li><b>Realtek, Qualcomm, MediaTek</b> — офлайн SDIO с флешки (пакет WLAN-WiFi): <code>&lt;флешка&gt;\Сервис\Драйверы\SDIO\SDIO_x64_R891.exe</code>.</li>
+  <li><b>Подключить интернет другим способом</b> и поставить драйвер через Центр обновления, SDIO или сайт производителя (у Huawei — PC Manager → Драйверы).</li>
+</ol>
+<p class="muted"><b>Как дать интернет без Wi-Fi:</b></p>
+<ul class="muted">
+  <li><b>Кабель</b> в LAN-порт ноутбука, а если порта нет — через <b>переходник Type-C → Ethernet</b> (или USB → Ethernet). Большинство переходников (Realtek RTL8153 и аналоги) работают в Windows 10/11 сразу, без драйверов.</li>
+  <li><b>Телефон Android по USB</b>: Настройки → Точка доступа → <b>USB-модем</b>. Работает без драйверов.</li>
+  <li>iPhone как USB-модем требует драйвера Apple — без интернета не подойдёт; используйте кабель или Android.</li>
+</ul>
+</div>
+
+<div class="card">
+<h3>Ноутбук на Snapdragon (ARM) <span class="tag">не загрузится</span></h3>
+<p>Surface Pro 11 / Laptop 7, Lenovo Yoga Slim 7x и ThinkPad T14s Gen 6, ASUS Vivobook S15, Dell XPS 13 9345, HP OmniBook X и другие на Snapdragon X. Процессор ARM — образы с этой флешки (x64) на нём не запускаются. Нужна Windows 11 ARM64 с сайта Microsoft. Проверить: в описании модели процессор «Snapdragon» / «Qualcomm».</p>
+</div>
+
+<div class="card">
+<h3>Не работает тачпад</h3>
+<p>На новых ноутбуках тачпад подключён по шине I2C: в установщике и сразу после установки он может не работать. Подключите <b>USB-мышь</b>, затем поставьте драйвер Intel Serial IO / AMD I2C (SDIO или сайт производителя) — тачпад заработает.</p>
+</div>
+
+<div class="card">
+<h3>Встала Windows 11 Home вместо Pro</h3>
+<p>Если в BIOS ноутбука зашит ключ Home (у большинства магазинных ноутбуков), установщик ставит Home без выбора редакции.</p>
+<ul>
+  <li>Перевод в Pro: Параметры → Система → Активация → Изменить ключ продукта → <code>VK7JG-NPHTM-C97JM-9MPGT-3V66T</code> → перезагрузка. Это общий ключ установки: редакция станет Pro, но <b>не активирована</b>.</li>
+  <li>Лицензия Home из BIOS активирует только Home. Нужна активная система без своего ключа — оставляйте Home.</li>
+</ul>
+</div>
+
+<div class="card">
+<h3>Шифрование диска BitLocker <span class="tag">Win11</span></h3>
+<p>Windows 11 (24H2 и новее) при чистой установке может сама зашифровать диск. С локальной учётной записью ключ восстановления никуда не сохраняется — после замены платы, сброса BIOS или ремонта данные будут недоступны.</p>
+<ul>
+  <li>Проверить и выключить: Параметры → Конфиденциальность и защита → <b>Шифрование устройства → Откл.</b> (или командная строка от администратора: <code>manage-bde -status</code>, затем <code>manage-bde -off C:</code>).</li>
+  <li>Перед переустановкой чужого ПК: если диск зашифрован (значок замка на диске), сначала сохраните данные или получите ключ восстановления у владельца.</li>
+</ul>
+</div>
+
+<div class="card">
+<h3>Сборка Windows не подходит под железо</h3>
+<ul>
+  <li><b>Только Windows 11:</b> Wi-Fi 7 (Intel BE200/BE201), камеры Intel MIPI (новые Dell, Lenovo, HP), часть Core Ultra — в LTSC 2021 драйверов не будет.</li>
+  <li><b>Intel 12-го поколения и новее</b> (P- и E-ядра) — лучше Windows 11: Windows 10 хуже распределяет нагрузку по ядрам.</li>
+  <li><b>Windows 7 на ПК новее ~2015 года</b> (Intel Skylake / AMD Ryzen): нет драйверов USB 3.0, NVMe и графики — работать не будет.</li>
+  <li><b>Старые планшеты и нетбуки на Atom с 32-битным UEFI</b> — 64-битная Windows не загрузится.</li>
+</ul>
+</div>
+
+<div class="card">
+<h3>Драйверы — только от производителя ноутбука</h3>
+<p>SDIO ставит универсальные драйверы. Для этих устройств берите драйвер с сайта производителя по модели:</p>
+<ul>
+  <li><b>Звук</b> с «умными» усилителями (Huawei, ASUS, Lenovo, Dell): с универсальным Realtek — тихо, хрипит или нет звука.</li>
+  <li><b>Две видеокарты</b> (Intel/AMD + NVIDIA): сначала встроенная графика, потом NVIDIA; если драйвер с сайта NVIDIA не ставится — драйвер с сайта ноутбука.</li>
+  <li><b>Fn-клавиши, режимы питания и кулеров, сканер отпечатка</b> — утилита производителя: Huawei PC Manager, Lenovo Vantage, MyASUS, HP Support Assistant, Dell SupportAssist.</li>
+  <li><b>Ноутбуки на AMD</b> — драйвер чипсета AMD, иначе проблемы со сном и быстрый разряд батареи.</li>
+</ul>
+</div>
+
+    <p><a class="btn" href="#">Закрыть</a></p>
+  </div>
+</div>
+
+<!-- 4. Программы автоустановки -->
+<h2>Что ставится автоматически</h2>
+<div class="card">
+<table>
+  <tr><td>Google Chrome</td><td>Основной браузер <i>(Win10/11)</i></td></tr>
+  <tr><td>Яндекс Браузер</td><td>Второй браузер, привычный для многих клиентов <i>(Win10/11, только если при установке был интернет)</i></td></tr>
+  <tr><td>Supermium</td><td>Современный Chromium, который ещё работает на Windows 7 <i>(Win7)</i></td></tr>
+  <tr><td>7-Zip</td><td>Архиватор: zip, rar, 7z и почти все форматы</td></tr>
+  <tr><td>VLC</td><td>Видео и аудио любых форматов без поиска кодеков</td></tr>
+  <tr><td>IrfanView</td><td>Быстрый просмотр фото, на русском, назначен для картинок</td></tr>
+  <tr><td>SumatraPDF</td><td>Лёгкий просмотрщик PDF, также DjVu и электронных книг</td></tr>
+  <tr><td>Visual C++ (все версии)</td><td>Библиотеки, без которых программы и игры выдают ошибки <code>msvcp…dll</code> / <code>vcruntime…dll</code></td></tr>
+  <tr><td>DirectX June 2010</td><td>Старые компоненты DirectX для игр и программ (ошибки <code>d3dx9_…dll</code>)</td></tr>
+  <tr><td>.NET Framework 4.8</td><td>Нужен многим программам <i>(Win7; в Win10/11 уже есть)</i></td></tr>
+  <tr><td>UpdatePack7R2</td><td>Все обновления Windows 7 одним пакетом: безопасность, сертификаты, совместимость <i>(Win7)</i></td></tr>
+  <tr><td>Win11Debloat</td><td>Убирает встроенный мусор, рекламу, Copilot и подсказки <i>(Win11; в LTSC — только твики)</i></td></tr>
+  <tr><td>Настройки</td><td>Видны расширения файлов, Проводник открывает «Этот компьютер», значок «Компьютер» на столе, пароль не устаревает, телеметрия выключена. В Win10/11 ещё выключены реклама и быстрый запуск. В LTSC вводится ключ IoT (меняет редакцию, не активирует)</td></tr>
+</table>
+</div>
+
+<!-- 5. Сервис -->
+<h2>Утилиты на флешке — папка «Сервис»</h2>
+<p class="muted">Портативные программы, без установки. При установке Windows лёгкая копия (~440 МБ) кладётся на рабочий стол — удалите её после настройки. Отмеченное * есть только на флешке.</p>
+<div class="card">
+<table>
+  <tr><th colspan="2">Диагностика</th></tr>
+  <tr><td>HWiNFO</td><td>Полная информация о железе, температуры и датчики</td></tr>
+  <tr><td>CPU-Z</td><td>Процессор, память, материнская плата — быстро и наглядно</td></tr>
+  <tr><td>AIDA64</td><td>Сведения о системе, тесты памяти и стабильности</td></tr>
+  <tr><td>OCCT *</td><td>Стресс-тест процессора, видеокарты и блока питания</td></tr>
+  <tr><td>FurMark</td><td>Нагрузка на видеокарту: перегрев, артефакты</td></tr>
+  <tr><td>IsMyLcdOK</td><td>Проверка матрицы на битые пиксели и засветы</td></tr>
+  <tr><td>iPerf</td><td>Замер реальной скорости сети между двумя ПК</td></tr>
+  <tr><th colspan="2">Диски</th></tr>
+  <tr><td>CrystalDiskInfo</td><td>Здоровье HDD/SSD по SMART — первое при подозрении на диск</td></tr>
+  <tr><td>WizTree</td><td>Что занимает место на диске — за секунды</td></tr>
+  <tr><th colspan="2">Лечение</th></tr>
+  <tr><td>KVRT *</td><td>Kaspersky Virus Removal Tool — проверка и лечение от вирусов</td></tr>
+  <tr><td>AdwCleaner</td><td>Удаление рекламного ПО, тулбаров, подмены браузера</td></tr>
+  <tr><td>FRST</td><td>Глубокий отчёт о системе для разбора сложного заражения</td></tr>
+  <tr><th colspan="2">Утилиты</th></tr>
+  <tr><td>Everything</td><td>Мгновенный поиск файлов по имени</td></tr>
+  <tr><td>Double Commander</td><td>Двухпанельный файловый менеджер</td></tr>
+  <tr><td>DDU</td><td>Полное удаление драйвера видеокарты перед переустановкой</td></tr>
+  <tr><td>BCUninstaller *</td><td>Массовое удаление программ с остатками</td></tr>
+  <tr><th colspan="2">Драйверы</th></tr>
+  <tr><td>Сеть</td><td>Intel Wi-Fi/Bluetooth и Realtek LAN — чтобы сразу появился интернет</td></tr>
+  <tr><td>SDIO</td><td>Автоподбор драйверов. На флешке — с офлайн-пакетами сети, Wi-Fi и модемов *; на рабочем столе — без пакетов, качает из интернета</td></tr>
+</table>
+</div>
+
+<!-- 6. Android -->
+<h2>Android — папка «Soft\APK»</h2>
+<p class="muted">Установщики для телефонов. Скопировать файл на телефон (кабель, LocalSend) или подключить флешку через OTG-переходник, открыть файл и разрешить установку из неизвестных источников. Файлы <b>.apkm</b> и <b>.xapk</b> ставятся только через SAI — сначала установите его.</p>
+<div class="card">
+<table>
+  <tr><th colspan="2">Диагностика</th></tr>
+  <tr><td>DevCheck</td><td>Железо, датчики, батарея, сведения о системе (.apkm)</td></tr>
+  <tr><td>Phone Doctor Plus</td><td>Пошаговый тест экрана, тача, динамиков, камер, кнопок (.xapk)</td></tr>
+  <tr><td>TestM</td><td>Тест телефона по шагам с итоговым отчётом</td></tr>
+  <tr><td>AccuBattery</td><td>Реальная ёмкость и износ батареи (нужно несколько зарядов)</td></tr>
+  <tr><td>MultiTouch Tester</td><td>Сколько касаний видит экран, мёртвые зоны тача</td></tr>
+  <tr><td>Galaxy Diagnostics</td><td>Фирменная диагностика Samsung</td></tr>
+  <tr><td>NetMonster</td><td>Сигнал сотовой сети, вышки (.apkm)</td></tr>
+  <tr><th colspan="2">Реклама и мусор</th></tr>
+  <tr><td>Appwatch</td><td>Показывает, какое приложение выводит всплывающую рекламу. Нужен доступ к «Спец. возможностям»; после поиска — удалить</td></tr>
+  <tr><td>Shizuku + Canta</td><td>Удаление системных приложений без root и без ПК: Shizuku запускается через отладку по Wi-Fi, Canta удаляет</td></tr>
+  <tr><th colspan="2">Утилиты</th></tr>
+  <tr><td>SAI</td><td>Установщик .apkm, .xapk, .apks — ставить первым</td></tr>
+  <tr><td>APKMirror Installer</td><td>Официальный установщик .apkm (сам ставится через SAI)</td></tr>
+  <tr><td>Material Files</td><td>Файловый менеджер — если на телефоне его нет</td></tr>
+  <tr><td>LocalSend</td><td>Передача файлов между телефоном и ПК по Wi-Fi</td></tr>
+  <tr><td>Smart Switch</td><td>Перенос данных на Samsung</td></tr>
+  <tr><td>RuStore</td><td>Российский магазин приложений: банки и госсервисы, которых нет в Google Play</td></tr>
+  <tr><td>Aurora Store</td><td>Google Play без аккаунта Google</td></tr>
+  <tr><td>F-Droid</td><td>Магазин открытых приложений</td></tr>
+  <tr><td>AmneziaVPN, Hiddify</td><td>VPN-клиенты</td></tr>
+</table>
+</div>
+
+<h2>Устройство флешки</h2>
+<div class="card">
+<table>
+  <tr><td>Корень</td><td>ISO-образы и эта инструкция. Новый образ достаточно скопировать в корень — он появится в меню Ventoy (без автоустановки)</td></tr>
+  <tr><td>Обслуживание</td><td>Не форматируйте флешку — пропадёт Ventoy. Обновить Ventoy: Ventoy2Disk → <b>Update</b> (образы и файлы сохраняются). Извлекайте безопасно: при выдёргивании во время записи образ может повредиться. Испорченный образ — ошибка при загрузке или установке; сверьте SHA-256</td></tr>
+  <tr><td>Сервис\</td><td>Утилиты, подробности — «Что здесь.txt»</td></tr>
+  <tr><td>Soft\Telegram\</td><td>Установщик Telegram для Windows — сам не ставится, только по просьбе клиента</td></tr>
+  <tr><td>Soft\APK\</td><td>Установщики для Android — раздел выше</td></tr>
+  <tr><td>Soft\Auto\</td><td>Скрипт донастройки, установщики, памятки для рабочего стола</td></tr>
+  <tr><td>ventoy\</td><td>Настройки Ventoy и шаблоны автоустановки</td></tr>
+</table>
+</div>
+
+</div>
+
+<!-- Окно: клавиши по брендам -->
+<div id="keys" class="modal">
+  <a href="#" class="modal-bg" aria-label="Закрыть"></a>
+  <div class="modal-box">
+    <a href="#" class="modal-x" aria-label="Закрыть">×</a>
+    <h3>Клавиши Boot Menu и BIOS</h3>
+    <p class="muted">Нажимать часто, сразу после включения, до логотипа Windows. На ноутбуках может понадобиться <b>Fn</b> + клавиша. У отдельных моделей клавиши отличаются — смотрите подсказку внизу экрана при старте.</p>
+    <table class="keys">
+      <tr><th colspan="3">Ноутбуки</th></tr>
+      <tr class="hd"><td>Бренд</td><td>Boot Menu</td><td>BIOS</td></tr>
+      <tr><td>Acer</td><td>F12 <i>(включить в BIOS: F12 Boot Menu)</i></td><td>F2</td></tr>
+      <tr><td>ASUS</td><td>Esc</td><td>F2</td></tr>
+      <tr><td>Dell</td><td>F12</td><td>F2</td></tr>
+      <tr><td>HP</td><td>F9 <i>(или Esc → F9)</i></td><td>F10 <i>(или Esc → F10)</i></td></tr>
+      <tr><td>Lenovo IdeaPad, Legion, Yoga</td><td>F12 / Fn+F12 <i>или кнопка Novo</i></td><td>F2 / Fn+F2</td></tr>
+      <tr><td>Lenovo ThinkPad</td><td>F12 <i>(или Enter → F12)</i></td><td>F1</td></tr>
+      <tr><td>Huawei, Honor</td><td>F12</td><td>F2</td></tr>
+      <tr><td>Xiaomi, Redmi</td><td>F12</td><td>F2</td></tr>
+      <tr><td>MSI</td><td>F11</td><td>Del</td></tr>
+      <tr><td>Samsung</td><td>Esc или F10</td><td>F2</td></tr>
+      <tr><td>Toshiba, Dynabook</td><td>F12</td><td>F2</td></tr>
+      <tr><td>Fujitsu</td><td>F12</td><td>F2</td></tr>
+      <tr><td>Gigabyte, Aorus</td><td>F12</td><td>F2</td></tr>
+      <tr><td>Sony VAIO</td><td>кнопка Assist</td><td>F2 <i>(или Assist)</i></td></tr>
+      <tr><td>DEXP, Ardor, Machenike и др. на Clevo</td><td>F7 или Esc</td><td>F2 или Del</td></tr>
+      <tr><td>Microsoft Surface</td><td>держать «Громкость −» + включение</td><td>держать «Громкость +» + включение</td></tr>
+      <tr><th colspan="3">Материнские платы и ПК</th></tr>
+      <tr class="hd"><td>Бренд</td><td>Boot Menu</td><td>BIOS</td></tr>
+      <tr><td>ASUS</td><td>F8</td><td>Del или F2</td></tr>
+      <tr><td>Gigabyte</td><td>F12</td><td>Del</td></tr>
+      <tr><td>MSI</td><td>F11</td><td>Del</td></tr>
+      <tr><td>ASRock</td><td>F11</td><td>Del или F2</td></tr>
+      <tr><td>Biostar</td><td>F9</td><td>Del</td></tr>
+      <tr><td>Intel (NUC и платы)</td><td>F10</td><td>F2</td></tr>
+      <tr><td>Dell OptiPlex</td><td>F12</td><td>F2</td></tr>
+      <tr><td>HP ProDesk, EliteDesk</td><td>F9</td><td>F10</td></tr>
+      <tr><td>Lenovo ThinkCentre</td><td>F12</td><td>F1</td></tr>
+      <tr><td>Acer (ПК)</td><td>F12</td><td>Del</td></tr>
+    </table>
+    <p><a class="btn" href="#">Закрыть</a></p>
+  </div>
+</div>
+<script>
+  // Закрытие окна клавишей Esc
+  document.onkeydown = function (e) {
+    e = e || window.event;
+    if ((e.keyCode || e.which) === 27 && (location.hash === '#keys' || location.hash === '#special')) location.hash = '';
+  };
+</script>
+</body>
+</html>
