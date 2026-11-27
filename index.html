@@ -43,9 +43,20 @@
     <link rel="icon" href="favicon.ico" sizes="48x48">
     <link rel="icon" href="assets/favicon-32.png" type="image/png" sizes="32x32">
     <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+    <link rel="preload" as="image" href="assets/logo.webp">
     <link rel="stylesheet" href="style.css">
+    <script>
+    (function () {
+        try {
+            if (sessionStorage.getItem("ss_intro")) return;
+            if (matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+            document.documentElement.classList.add("intro");
+        } catch (e) {}
+    })();
+    </script>
 </head>
 <body class="site">
+    <div id="intro" aria-hidden="true"><img src="assets/logo.webp" alt="" width="560" height="326"></div>
     <header class="header">
         <nav class="nav-container">
             <a class="logo" href="index.html"><img src="assets/logo.webp" alt="SmartShop" width="560" height="326"></a>
@@ -267,5 +278,6 @@
     </nav>
     <script src="nav.js" defer></script>
     <script src="form.js" defer></script>
+    <script src="intro.js" defer></script>
 </body>
 </html>
