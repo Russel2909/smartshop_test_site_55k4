@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Команды операторов — шпаргалка SmartShop</title>
+<style>
+  :root { --bg:#f5f6f8; --card:#fff; --ink:#1d1f23; --muted:#6b7280; --line:#e5e7eb; --acc:#e30611; }
+  * { box-sizing:border-box; }
+  body { margin:0; font:16px/1.45 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; background:var(--bg); color:var(--ink); }
+  header { padding:20px 24px 8px; }
+  h1 { margin:0 0 4px; font-size:22px; }
+  .sub { color:var(--muted); font-size:13px; }
+  nav { display:flex; flex-wrap:wrap; gap:8px; padding:12px 24px; position:sticky; top:0; background:var(--bg); z-index:2; border-bottom:1px solid var(--line); }
+  nav button { border:1px solid var(--line); background:#fff; padding:9px 16px; border-radius:999px; font-size:15px; cursor:pointer; }
+  nav button.on { color:#fff; border-color:transparent; }
+  main { padding:16px 24px 40px; max-width:900px; }
+  .grid { display:grid; grid-template-columns:repeat(auto-fill, minmax(260px,1fr)); gap:12px; }
+  .cmd { background:var(--card); border:1px solid var(--line); border-radius:12px; padding:12px 14px; display:flex; flex-direction:column; gap:6px; }
+  .cmd .what { font-size:14px; color:var(--muted); }
+  .cmd button { align-self:flex-start; font:700 22px/1.2 ui-monospace, Consolas, monospace; letter-spacing:.5px; background:none; border:2px solid currentColor; border-radius:10px; padding:6px 12px; cursor:pointer; }
+  .cmd .note { font-size:12.5px; color:var(--muted); }
+  .warn { background:#fff7e6; border:1px solid #f3d38a; border-radius:12px; padding:12px 14px; margin-top:14px; font-size:14px; }
+  section { display:none; } section.on { display:block; }
+  h2 { font-size:18px; margin:22px 0 10px; }
+  ol, ul { padding-left:22px; } li { margin:4px 0; }
+  .toast { position:fixed; bottom:20px; left:50%; transform:translateX(-50%); background:#111; color:#fff; padding:10px 16px; border-radius:10px; opacity:0; transition:opacity .2s; pointer-events:none; }
+  .toast.show { opacity:1; }
+  .src { font-size:12px; color:var(--muted); margin-top:30px; }
+  .src a { color:var(--muted); }
+  @media print { nav, .toast { display:none; } section { display:block !important; page-break-inside:avoid; } }
+</style>
+</head>
+<body>
+<header>
+  <h1>Команды операторов</h1>
+  <div class="sub">Нажми на команду — она скопируется. Набирать на телефоне клиента → кнопка вызова. Сверено с сайтами операторов 17.11.2026.</div>
+</header>
+<nav id="tabs"></nav>
+<main id="main"></main>
+<div class="toast" id="toast">Скопировано</div>
+
+<script>
+const OPS = {
+  mts: { name:"МТС", color:"#e30611", cmds:[
+    ["Мой номер", "*887#", "✓ сайт МТС"],
+    ["Баланс", "*100#", "✓ сайт МТС"],
+    ["Тариф, остатки, подписки", "Мой МТС", "Приложение → «Подключённые услуги и сервисы». ✓ сайт МТС"],
+    ["Мой тариф (USSD)", "*111*59#", "⚠ не с сайта МТС — проверить"],
+    ["Обещанный платёж", "*122#", "Или *522#. ✓ сайт МТС"],
+    ["Перейти на «Налегке»", "*111*8888#", "✓ сайт МТС. В «Мой МТС» перейти нельзя — только командой или в Личном кабинете"],
+    ["Отключить опцию «Всегда Налегке»", "*111*255*2#", "✓ сайт МТС"],
+    ["Поддержка", "0890", "8 800 250-08-90"],
+  ]},
+  beeline: { name:"Билайн", color:"#d4a300", cmds:[
+    ["Мой номер", "*110*10#", "✓ сайт Билайна"],
+    ["Баланс и остатки пакетов", "*102#", "✓ сайт Билайна (предоплата)"],
+    ["Мой тариф", "*110*05#", "Или звонок 067405. ✓ сайт Билайна"],
+    ["Платные подключённые услуги", "*110*09#", "✓ сайт Билайна"],
+    ["5 последних списаний", "*122#", "✓ сайт Билайна"],
+    ["Доверительный платёж (сумма)", "*141*7#", "✓ сайт Билайна"],
+    ["Поддержка", "0611", "8 800 700-06-11"],
+  ]},
+  megafon: { name:"МегаФон", color:"#00b956", cmds:[
+    ["Мой номер", "*205#", "✓ сайт МегаФона"],
+    ["Баланс", "*100#", "Или SMS «Баланс» на 000100. ✓ сайт МегаФона"],
+    ["Остатки пакетов", "*558#", "✓ сайт МегаФона"],
+    ["Мой тариф", "*105*3#", "✓ сайт МегаФона"],
+    ["Подписки", "ЛК / приложение", "«Услуги» → «Подключённые». Отключить: SMS «Стоп ХХ» на 5151. ✓ сайт МегаФона"],
+    ["Поддержка", "0500", "8 800 550-05-00"],
+  ]},
+  t2: { name:"Т2 (Теле2)", color:"#1f2229", cmds:[
+    ["Мой номер", "*201#", "✓ сайт Т2"],
+    ["Баланс", "*105#", "✓ сайт Т2"],
+    ["Остатки минут, SMS, ГБ", "*155*0#", "✓ сайт Т2"],
+    ["Мой тариф", "*108#", "✓ сайт Т2"],
+    ["Платные подписки", "*189#", "✓ сайт Т2"],
+    ["Платные услуги", "*153#", "✓ сайт Т2"],
+    ["Обещанный платёж", "*122#", "✓ сайт Т2"],
+    ["Поддержка", "611"],
+  ]},
+};
+
+const NUANCES = `
+<h2>Общее</h2>
+<ul>
+  <li>USSD-команды бесплатные и работают даже при нулевом балансе — номер, баланс и тариф можно узнать всегда.</li>
+  <li>Сначала проверь <b>номер → баланс → тариф → подписки</b>, потом принимай решение.</li>
+  <li>Если клиент жалуется на списания — первым делом смотреть подписки (команды во вкладках) и отключать лишнее.</li>
+  <li>Билайн и МегаФон: отправляя USSD-запрос баланса, абонент соглашается получать рекламу. Отказ на Билайне — 067432.</li>
+  <li>МТС «Налегке»: перейти нельзя, если номер на организацию или подключён пакет «связь + домашний интернет + ТВ».</li>
+</ul>
+<h2>Смена тарифа, когда «услуги ограничены»</h2>
+<ol>
+  <li>Проверить баланс. Если минус или не хватает на абонплату — <b>сначала пополнить, потом менять тариф</b>.</li>
+  <li>Сколько положить на МТС «Налегке»: <b>минус + 200 ₽</b>. Из них 12,5 ₽ — первые сутки опции «Всегда Налегке», 150 ₽ — плата за переход, если тариф уже меняли меньше месяца назад.</li>
+  <li>Набрать команду перехода (МТС «Налегке» — <b>*111*8888#</b>), дождаться SMS, проверить тариф командой «Мой тариф».</li>
+  <li>Не прошло — поддержка оператора или офис.</li>
+</ol>
+<h2>МТС «Налегке» — для кнопочных телефонов (Москва)</h2>
+<ul>
+  <li>Абонплаты нет. Опция «Всегда Налегке» — 12,5 ₽/сутки: безлимит на МТС и городские своего региона + 100 МБ/сутки.</li>
+  <li>Без опции: 2,5 ₽/мин на МТС и городские, 4 ₽ на других операторов, до 15,5 ₽ на другие регионы. Входящие бесплатно.</li>
+  <li>Звонит мало и в основном на чужих операторов → опцию отключить в «Мой МТС». Много говорит с МТС → оставить.</li>
+  <li>При регистрации номера «Налегке» в списке нет — регистрируем на любой доступный тариф и сразу переводим.</li>
+</ul>
+<div class="warn"><b>Не проверено:</b> пройдёт ли переход при минусе и плата 150 ₽ за повторную смену — на сайте МТС не указано. Команды с пометкой ✓ сверены с сайтами операторов 17.11.2026, с ⚠ — нет.</div>
+`;
+
+const tabs = document.getElementById("tabs"), main = document.getElementById("main");
+const all = [...Object.entries(OPS), ["nuances", {name:"Нюансы", color:"#374151"}]];
+all.forEach(([id, op], i) => {
+  const b = document.createElement("button");
+  b.textContent = op.name; b.dataset.id = id; b.dataset.color = op.color;
+  b.onclick = () => show(id); tabs.appendChild(b);
+  const s = document.createElement("section"); s.id = "s-" + id;
+  if (id === "nuances") s.innerHTML = NUANCES;
+  else {
+    const g = document.createElement("div"); g.className = "grid";
+    op.cmds.forEach(([what, code, note]) => {
+      const c = document.createElement("div"); c.className = "cmd";
+      c.innerHTML = `<div class="what">${what}</div><button style="color:${op.color}">${code}</button>` + (note ? `<div class="note">${note}</div>` : "");
+      c.querySelector("button").onclick = () => copy(code);
+      g.appendChild(c);
+    });
+    s.innerHTML = `<h2 style="margin-top:4px">${op.name}</h2>`; s.appendChild(g);
+  }
+  main.appendChild(s);
+});
+function show(id) {
+  document.querySelectorAll("nav button").forEach(b => { const on = b.dataset.id === id; b.classList.toggle("on", on); b.style.background = on ? b.dataset.color : "#fff"; });
+  document.querySelectorAll("section").forEach(s => s.classList.toggle("on", s.id === "s-" + id));
+  try { localStorage.setItem("op", id); } catch (e) {}
+}
+function copy(t) {
+  const done = () => { const el = document.getElementById("toast"); el.textContent = "Скопировано: " + t; el.classList.add("show"); setTimeout(() => el.classList.remove("show"), 1200); };
+  if (navigator.clipboard) navigator.clipboard.writeText(t).then(done, () => fallback(t, done)); else fallback(t, done);
+}
+function fallback(t, done) { const a = document.createElement("textarea"); a.value = t; document.body.appendChild(a); a.select(); try { document.execCommand("copy"); } catch (e) {} a.remove(); done(); }
+let start = "mts"; try { start = localStorage.getItem("op") || "mts"; } catch (e) {}
+show(start);
+</script>
+<div class="src" style="padding:0 24px 24px">Источники: support.mts.ru, moskva.beeline.ru, moscow.megafon.ru, msk.t2.ru / spb.t2.ru</div>
+</body>
+</html>
